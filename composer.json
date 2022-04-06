@@ -1,0 +1,21 @@
+{
+    "name": "lfguerino/zipphp",
+    "description": "A simple ZIP files and directories in PHP",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "LFGuerino\\ZipPHP\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Luiz Filipe Guerino",
+            "email": "lfguerino@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "maennchen/zipstream-php": "^2.1"
+    }
+}
