@@ -7,22 +7,38 @@ class ZipPHP
 
     private $directory;
 
-    public function zip(string $directory, string $outputZipFileName)
+    public function zip(string $directory, string $outputZipFile)
     {
+
+        $outputZipFile = __DIR__ . "/../output/{$outputZipFile}.zip";
+        $fileOutputName = basename($outputZipFile);
+
+        if (file_exists($outputZipFile)) {
+            echo ("<h1 style='color:red'>Ops! O arquivo {$fileOutputName} já existe!<h1>");
+            $this->generateDownloadLink($fileOutputName);
+            return;
+        }
+
         $this->directory = __DIR__ . "/../../" . $directory;
-        // var_dump($directory, $this->directory);
+
+        if (!is_dir($this->directory)) {
+            echo ("<h1 style='color:red'>O diretório desejado não foi econtrado!<h1>");
+            return;
+        }
 
         $files = $this->getDirItems(__DIR__ . "/../../" . $directory, true);
 
         $generated = $this->generate_zip_file(
             $files,
-            __DIR__ . "/../output/{$outputZipFileName}.zip",
+            __DIR__ . "/../output/{$fileOutputName}",
             false
         );
 
         if ($generated) {
-            echo "<h1 style='color:blue'>Arquivo zip gerado com sucesso! ({$outputZipFileName})</h1>";
-            echo "<h2>Fazer Download: <a href='?download={$outputZipFileName}'>{$outputZipFileName}.zip</a></h2>";
+            echo "<h1 style='color:blue'>Arquivo zip gerado com sucesso! ({$fileOutputName})</h1>";
+            $this->generateDownloadLink($fileOutputName);
+        } else {
+            echo "<h1 style='color:red'>Ops! Ocorreu um erro ao gerar o arquivo zip!</h1>";
         }
     }
 
@@ -46,9 +62,8 @@ class ZipPHP
         $scan = scandir($dir);
         foreach ($scan as $key => $value) {
             $target = realpath($dir . DIRECTORY_SEPARATOR . $value);
-            $fileName = explode(basename($dir) . '/', $target)[0];
             if (!is_dir($target)) {
-                $files[] = $fileName;
+                $files[] = $target;
             } else if ($value != "." && $value != "..") {
                 if ($recursive) {
                     $this->getDirItems($target, true, $files);
@@ -66,40 +81,31 @@ class ZipPHP
             $fileName = basename($destination);
             echo ("<h1 style='color:red'>Ops! O arquivo {$fileName} já existe!<h1>");
             echo "<h2>Fazer Download: <a href='?download={$fileName}'>{$fileName}</a></h2>";
-            die();
+            return false;
         }
         //vars
         $valid_files = array();
-        //if files were passed in...
         if (is_array($files)) {
-            //cycle through each file
             foreach ($files as $file) {
-                //make sure the file exists
                 if (file_exists($file)) {
                     $valid_files[] = $file;
                 }
             }
         }
-        //if we have good files...
+
         if (count($valid_files)) {
-            //create the archive
             $zip = new \ZipArchive();
             if ($zip->open($destination, $overwrite ? \ZIPARCHIVE::OVERWRITE : \ZIPARCHIVE::CREATE) !== true) {
                 return false;
             }
-            //add the files
             foreach ($valid_files as $file) {
                 if (file_exists($file) && is_file($file)) {
                     $zip->addFile($file, str_replace(realpath($this->directory) . "\\", "", $file));
                 }
             }
-            //debug
-            //echo 'The zip archive contains ',$zip->numFiles,' files with a status of ',$zip->status;
 
-            //close the zip -- done!
             $zip->close();
 
-            //check to make sure the file exists
             return file_exists($destination);
         } else {
             return false;
@@ -119,5 +125,16 @@ class ZipPHP
         header('Pragma: public');
         header('Content-Length: ' . filesize($file));
         readfile($file);
+    }
+
+    public function generateDownloadLink(string $fileOutputName): void
+    {
+        $filePath = __DIR__ . "/../output/{$fileOutputName}";
+
+        if (file_exists($filePath)) {
+            echo "<h1 style='color: green'>Link para Download: <a href='output/{$fileOutputName}'>{$fileOutputName}</a></h1>";
+        } else {
+            echo "<h1 style='color: red'> O arquivo {$fileOutputName} não existe!</h1>";
+        }
     }
 }
