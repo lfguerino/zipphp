@@ -1,11 +1,18 @@
 <?php
 require __DIR__ . "/vendor/autoload.php";
 
+echo "<a href='index.php'><< Início >></a>";
+
 $zipPHP = (new LFGuerino\ZipPHP\ZipPHP);
 
-if (empty($_GET['download'])) {
-    $zipPHP->zip("agendaweb", "meuProjeto");
-} else {
+if (!empty($_GET['filename']) && !empty($_GET['dirProjectName'])) {
+    $filename = filter_var($_GET['filename'], FILTER_SANITIZE_STRIPPED);
+    $dirProjectName = filter_var($_GET['dirProjectName'], FILTER_SANITIZE_STRIPPED);
+
+    $zipPHP->zip($dirProjectName, $filename);
+}
+
+if (!empty($_GET['download'])) {
     $file = __DIR__ . "/output/" . filter_var($_GET['download'], FILTER_SANITIZE_STRIPPED) . ".zip";
 
     if (file_exists($file)) {
@@ -23,3 +30,5 @@ if (empty($_GET['download'])) {
         echo "<h1>Arquivo " . basename($file) . " não encontrado</h1>";
     }
 }
+
+require_once __DIR__ . "/views/home.php";
