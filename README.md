@@ -3,8 +3,8 @@
 ###
 
 [![Maintainer](http://img.shields.io/badge/maintainer-@lfguerino-blue.svg?style=flat-square)](https://twitter.com/lfguerino)
-[![Source Code](http://img.shields.io/badge/source-zipphp/zipphp-blue.svg?style=flat-square)](https://github.com/lfguerino/zipphp)
-[![PHP from Packagist](https://img.shields.io/packagist/php-v/zipphp/zipphp.svg?style=flat-square)](https://packagist.org/packages/zipphp/zipphp)
+[![Source Code](http://img.shields.io/badge/source-lfguerino/zipphp-blue.svg?style=flat-square)](https://github.com/lfguerino/zipphp)
+[![PHP from Packagist](https://img.shields.io/packagist/php-v/lfguerino/zipphp.svg?style=flat-square)](https://packagist.org/packages/zipphp/zipphp)
 [![Latest Version](https://img.shields.io/github/release/lfguerino/zipphp.svg?style=flat-square)](https://github.com/lfguerino/zipphp/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 [![Build](https://img.shields.io/scrutinizer/build/g/lfguerino/zipphp.svg?style=flat-square)](https://scrutinizer-ci.com/g/lfguerino/zipphp)
