@@ -19,6 +19,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
+        "php": ">=7.2.0",
         "coffeecode/router": "^1.0",
         "league/plates": "^4.0-alpha"
     }
