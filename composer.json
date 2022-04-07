@@ -5,8 +5,11 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "LFGuerino\\ZipPHP\\": "src/"
-        }
+            "LFGuerino\\ZipPHP\\": "source/"
+        },
+        "files": [
+            "source/Boot/Config.php"
+        ]
     },
     "authors": [
         {
@@ -16,6 +19,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "maennchen/zipstream-php": "^2.1"
+        "coffeecode/router": "^1.0",
+        "league/plates": "^4.0-alpha"
     }
 }

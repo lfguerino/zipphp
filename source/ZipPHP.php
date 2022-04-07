@@ -7,6 +7,11 @@ class ZipPHP
 
     private $directory;
 
+    public function home(): void
+    {
+        echo "<h1>Home</h1>";
+    }
+
     public function zip(string $directory, string $outputZipFile)
     {
 

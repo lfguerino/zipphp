@@ -1,34 +1,23 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<?php $v->layout("_theme"); ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZipPHP</title>
-</head>
-
+<?php $v->start("styles"); ?>
 <style>
     input {
         display: block;
         margin-bottom: 20px;
     }
 </style>
+<?php $v->end(); ?>
 
-<body>
-
-    <h1>LFGuerino\ZipPHP</h1>
-    <form>
-        <label>
-            Nome do Diretório do Projeto
-            <input name="dirProjectName" />
-        </label>
-        <label>
-            Nome do Arquivo ZIP
-            <input name="filename" />
-            <button>Gerar Arquivo</button>
-        </label>
-    </form>
-</body>
-
-</html>
+<h1>LFGuerino\ZipPHP</h1>
+<form>
+    <label>
+        Nome do Diretório do Projeto
+        <input name="dirProjectName" />
+    </label>
+    <label>
+        Nome do Arquivo ZIP
+        <input name="filename" />
+        <button>Gerar Arquivo</button>
+    </label>
+</form>
